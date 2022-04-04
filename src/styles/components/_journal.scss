@@ -6,7 +6,7 @@
 
 .journal__sidebar {
     background-color: $dark-grey;
-    color: white;
+    color: lighten($color: gray, $amount: 20);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -44,13 +44,23 @@
 .journal__entries {
     flex: 1 1 auto;
     margin-top: 30px;
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+    display: none;
+    }
+
 }
 
 .journal__entry {
-    background-color: white;
+    background-color: $react;
     border-radius: 4px;
-    color: $dark-grey;
+    color: lighten($color: gray, $amount: 20);
     display: flex;
     margin-bottom: 10px;
     overflow: hidden;

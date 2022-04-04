@@ -10,7 +10,7 @@
 }
 
 .auth__box-container {
-    background-color: white;
+    background-color: $react;
     box-shadow: 0px 3px $dark-grey;
     border-radius: 2px;
     padding: 20px;
@@ -19,12 +19,13 @@
 
 
 .auth__title {
-    color: darken($color: $primary, $amount: 20);
+    color: lighten($color: $primary, $amount: 10);
     margin-bottom: 20px;
 }
 
 .auth__input {
-    color: $dark-grey;
+    color: darken($color: azure, $amount: 10);
+    background-color: $react;
     border: 0px;
     border-bottom: 1px solid $light-grey;
     font-size: 16px;

@@ -32,7 +32,8 @@
 }
 
 .notes__title-input {
-    color: $dark-grey;
+    color: lighten($color: gray, $amount: 20);
+    background-color: $react;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -40,7 +41,8 @@
 
 .notes__textarea {
     border: none;
-    color: $dark-grey;
+    color: lighten($color: gray, $amount: 20);
+    background-color: $react;
     font-size: 20px;
     flex: 1 1 auto;
     resize: none;
