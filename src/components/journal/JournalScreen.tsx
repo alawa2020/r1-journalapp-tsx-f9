@@ -1,8 +1,17 @@
+import React from "react";
+import { Sidebar } from "./Sidebar";
+import { NoteScreen } from "../notes/NoteScreen";
+// import { NothingSelected } from './NothingSelected';
 
 export const JournalScreen = () => {
   return (
-    <div>
-      <h1>Journal Screen</h1>
+    <div className="journal__main-content">
+      <Sidebar />
+
+      <main>
+        {/* <NothingSelected /> */}
+        <NoteScreen />
+      </main>
     </div>
-  )
-}
+  );
+};

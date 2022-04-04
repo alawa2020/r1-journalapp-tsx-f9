@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { FC } from "react";
+import { Redirect, Route } from "react-router-dom";
 
 interface Props {
   isAuthenticated: boolean;
@@ -14,13 +14,15 @@ export const PrivateRoute: FC<Props> = ({
   ...rest
 }) => {
   return (
-    <Route 
+    <Route
       {...rest}
-      component={ (props: any) => (
-        isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to="/auth/signin" />
-      )}
+      component={(props: any) =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/auth/signin" />
+        )
+      }
     />
-  )
-}
+  );
+};
