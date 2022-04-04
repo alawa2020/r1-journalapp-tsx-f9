@@ -9,7 +9,7 @@ import { PublicRoute } from "./PublicRoute";
 
 export const AppRouter = () => {
   //hooks
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <Router>
