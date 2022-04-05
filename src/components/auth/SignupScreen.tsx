@@ -1,8 +1,13 @@
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
+
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { useForm } from "../../hooks/useForm";
 import { isValidFormRegister } from '../../helpers/isValidFormRegister';
 import { ErrorForm } from "./ErrorForm";
+import { startAuthSingUp } from "../../state/actions/authActions";
+
 
 //interfaces
 interface FormData {
@@ -35,6 +40,7 @@ export const SignupScreen = () => {
   const {formValues, handleChange} = useForm<FormData>(initialForm);
   const { email, name, password, password2 } = formValues;
   const [error, setError] = useState<ErrorData>( initialError );
+  const dispatch = useDispatch();
 
   //functions
   const handleSignupSubmit = (e: FormEvent<HTMLFormElement> ) => {
@@ -48,7 +54,9 @@ export const SignupScreen = () => {
       });
       return;
     }
-    alert('user registered')
+
+    dispatch( startAuthSingUp( email, password, name) );
+   
   }
 
   return (
