@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from 'firebase/auth'
 
 import { AuthAction } from "../types/types";
@@ -20,6 +21,10 @@ export const doAuthSignIn = ( uid: string, userName: string ):AuthAction => ({
     uid,
     userName,
   }
+});
+
+const doAuthSignOut = ():AuthAction => ({
+  type: "[AUTH] sign out",
 })
 
 
@@ -64,6 +69,18 @@ export const startSigninGoogle = () => {
       const authError = err as AuthError;
       Swal.fire('Error', authError.message, 'error')
     }
-
   }
+}
+
+export const startAuthSignOut = () => {
+  return async( dispatch: Dispatch ) => {
+    try {
+      await signOut( auth );
+      dispatch( doAuthSignOut() );
+    } catch (err) {
+      const authError = err as AuthError;
+      Swal.fire('Error', authError.message, 'error');
+    }
+  }
+
 }
