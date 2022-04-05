@@ -1,44 +1,105 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { isValidFormRegister } from '../../helpers/isValidFormRegister';
+import { ErrorForm } from "./ErrorForm";
 
+//interfaces
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  password2: string;
+}
+interface ErrorData {
+  state: boolean;
+  msg: string;
+}
+
+// start data
+const initialForm: FormData = {
+  name: 'peter',
+  email: 'peter@gmail.com',
+  password: '123456',
+  password2: '123456',
+}
+
+const initialError: ErrorData = {
+  state: false,
+  msg: '',
+}
+
+//
 export const SignupScreen = () => {
+  //hooks
+  const {formValues, handleChange} = useForm<FormData>(initialForm);
+  const { email, name, password, password2 } = formValues;
+  const [error, setError] = useState<ErrorData>( initialError );
+
+  //functions
+  const handleSignupSubmit = (e: FormEvent<HTMLFormElement> ) => {
+    setError(initialError);
+    e.preventDefault();
+    const {errorMsg, isValidForm} = isValidFormRegister( name, email, password, password2 );
+    if( !isValidForm ) {
+      setError({
+        state: true,
+        msg: errorMsg,
+      });
+      return;
+    }
+    alert('user registered')
+  }
+
   return (
     <>
-      <h3 className="auth__title">Register</h3>
+      <h3 className="auth__title">Sign up</h3>
 
-      <form>
+      <form onSubmit={handleSignupSubmit}>
+
+        {
+          error.state && <ErrorForm errorMsg={error.msg} />
+        }
         <input
           type="text"
           placeholder="Name"
-          name="name"
           className="auth__input"
           autoComplete="off"
+          name="name"
+          value={name}
+          onChange={handleChange}
         />
 
         <input
           type="text"
           placeholder="Email"
-          name="email"
           className="auth__input"
           autoComplete="off"
+          name="email"
+          value={email}
+          onChange={handleChange}
         />
 
         <input
           type="password"
           placeholder="Password"
-          name="password"
           className="auth__input"
+          name="password"
+          value={password}
+          onChange={handleChange}
         />
 
         <input
           type="password"
           placeholder="Confirm password"
-          name="password2"
           className="auth__input"
+          name="password2"
+          value={password2}
+          onChange={handleChange}
         />
 
         <button type="submit" className="btn btn-primary btn-block mb-5">
-          Register
+          Sign up
         </button>
 
         <Link to="/auth/signin" className="link">

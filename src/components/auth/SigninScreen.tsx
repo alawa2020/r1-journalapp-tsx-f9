@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const SigninScreen = () => {
   return (
     <>
-      <h3 className="auth__title">Login</h3>
+      <h3 className="auth__title">Sign in</h3>
 
       <form>
         <input
@@ -23,7 +23,7 @@ export const SigninScreen = () => {
         />
 
         <button type="submit" className="btn btn-primary btn-block">
-          Login
+          Sign in
         </button>
 
         <div className="auth__social-networks">
