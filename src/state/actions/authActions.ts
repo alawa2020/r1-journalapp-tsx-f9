@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword, 
   updateProfile,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
 
 import { AuthAction } from "../types/types";
@@ -47,5 +49,21 @@ export const startAuthSignIn = ( email: string, password: string ) => {
       const authError = err as AuthError;
       Swal.fire('Error', authError.message, 'error')
     }
+  }
+}
+
+export const startSigninGoogle = () => {
+  return async( dispatch: Dispatch ) => {
+
+    try {
+      const googleAuthProvider = new GoogleAuthProvider();
+      const { user } = await signInWithPopup( auth, googleAuthProvider );
+      dispatch( doAuthSignIn( user.uid, user.displayName || ''));
+      Swal.fire('Success', 'Successful login', 'success');
+    } catch (err) {
+      const authError = err as AuthError;
+      Swal.fire('Error', authError.message, 'error')
+    }
+
   }
 }

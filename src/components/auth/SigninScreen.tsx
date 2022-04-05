@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 import { ErrorForm } from "./ErrorForm";
 import { isValidFormSignin } from '../../helpers/isValidFormSignin';
 import { useDispatch } from "react-redux";
-import { startAuthSignIn } from "../../state/actions/authActions";
+import { startAuthSignIn, startSigninGoogle } from "../../state/actions/authActions";
 
 // interfaces
 interface FormData {
@@ -49,6 +49,10 @@ export const SigninScreen = () => {
     }
     dispatch( startAuthSignIn( email, password ));
   }
+
+  const handleSigninGoogle = () => {
+    dispatch(startSigninGoogle());
+  }
   return (
     <>
       <h3 className="auth__title">Sign in</h3>
@@ -83,7 +87,7 @@ export const SigninScreen = () => {
         <div className="auth__social-networks">
           <p>Login with social networks</p>
 
-          <div className="google-btn">
+          <div className="google-btn" onClick={ handleSigninGoogle }>
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"
