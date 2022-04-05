@@ -5,7 +5,7 @@ interface Result {
   errorMsg: string;
 }
 
-export const isValidFormRegister = ( name: string, email: string, password: string, password2: string ): Result => {
+export const isValidFormSignup = ( name: string, email: string, password: string, password2: string ): Result => {
   let isValidForm = true;
   let errorMsg = '';
 

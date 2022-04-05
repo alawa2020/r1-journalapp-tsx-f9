@@ -1,25 +1,79 @@
-import React from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useForm } from "../../hooks/useForm";
+import { ErrorForm } from "./ErrorForm";
+import { isValidFormSignin } from '../../helpers/isValidFormSignin';
+import { useDispatch } from "react-redux";
+import { startAuthSignIn } from "../../state/actions/authActions";
+
+// interfaces
+interface FormData {
+  email: string;
+  password: string;
+}
+interface FormError {
+  state: boolean;
+  msg: string;
+}
+
+// start datas
+const initialForm: FormData = {
+  email: 'peter@gmail.com',
+  password: '123456',
+}
+const initialError: FormError = {
+  state: false,
+  msg: '',
+}
 export const SigninScreen = () => {
+
+  // hooks 
+  const { formValues, handleChange } = useForm<FormData>( initialForm);
+  const { email, password } = formValues;
+  const [error, setError] = useState<FormError>(initialError);
+  const dispatch = useDispatch();
+
+  // functions
+  const handleSigninSubmit = (e: FormEvent<HTMLFormElement>) => {
+    setError( initialError );
+    e.preventDefault();
+    const {errorMsg, isValidForm } = isValidFormSignin( email, password );
+    if( !isValidForm ) {
+      setError({
+        ...error,
+        msg: errorMsg,
+        state: true,
+      });
+      return;
+    }
+    dispatch( startAuthSignIn( email, password ));
+  }
   return (
     <>
       <h3 className="auth__title">Sign in</h3>
 
-      <form>
+      <form onSubmit={ handleSigninSubmit }>
+        {
+          error.state && <ErrorForm errorMsg={ error.msg } />
+        }
         <input
           type="text"
           placeholder="Email"
-          name="email"
           className="auth__input"
           autoComplete="off"
-        />
+          name="email"
+          value={ email }
+          onChange={ handleChange }
+          />
 
         <input
           type="password"
           placeholder="Password"
-          name="password"
           className="auth__input"
+          name="password"
+          value={ password }
+          onChange={ handleChange }
         />
 
         <button type="submit" className="btn btn-primary btn-block">

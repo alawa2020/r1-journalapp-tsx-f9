@@ -1,7 +1,11 @@
 import { Dispatch } from "redux";
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { AuthError } from 'firebase/auth'
 import Swal from "sweetalert2";
+import { 
+  AuthError, 
+  createUserWithEmailAndPassword, 
+  updateProfile,
+  signInWithEmailAndPassword,
+} from 'firebase/auth'
 
 import { AuthAction } from "../types/types";
 import { auth } from '../../firebase/config';
@@ -27,7 +31,20 @@ export const startAuthSingUp = ( email: string, password: string, name: string )
       Swal.fire('Success', 'User registered successfully', 'success')
     } catch ( err ) {
       console.log({ err });
-      let authError = err as AuthError;
+      const authError = err as AuthError;
+      Swal.fire('Error', authError.message, 'error')
+    }
+  }
+}
+
+export const startAuthSignIn = ( email: string, password: string ) => {
+  return async( dispatch: Dispatch) => {
+    try {
+      const { user } = await signInWithEmailAndPassword( auth, email, password );
+      dispatch( doAuthSignIn( user.uid, user.displayName || ''));
+      Swal.fire('Success', 'Successful login', 'success')
+    } catch (err) {
+      const authError = err as AuthError;
       Swal.fire('Error', authError.message, 'error')
     }
   }

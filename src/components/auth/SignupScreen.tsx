@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useForm } from "../../hooks/useForm";
-import { isValidFormRegister } from '../../helpers/isValidFormRegister';
+import { isValidFormSignup } from '../../helpers/isValidFormSignup';
 import { ErrorForm } from "./ErrorForm";
 import { startAuthSingUp } from "../../state/actions/authActions";
 
@@ -46,7 +46,7 @@ export const SignupScreen = () => {
   const handleSignupSubmit = (e: FormEvent<HTMLFormElement> ) => {
     setError(initialError);
     e.preventDefault();
-    const {errorMsg, isValidForm} = isValidFormRegister( name, email, password, password2 );
+    const {errorMsg, isValidForm} = isValidFormSignup( name, email, password, password2 );
     if( !isValidForm ) {
       setError({
         state: true,
