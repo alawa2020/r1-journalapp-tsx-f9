@@ -9,3 +9,6 @@ export type AuthAction =
   | { 
       type: '[AUTH] sign out' 
     }
+
+export type NotesAction =
+    | { type: '[Notes] something'}
