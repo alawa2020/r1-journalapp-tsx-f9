@@ -14,7 +14,7 @@ import { auth } from '../../firebase/config';
 
 
 //synchronous actions
-const doAuthSignIn = ( uid: string, userName: string ):AuthAction => ({
+export const doAuthSignIn = ( uid: string, userName: string ):AuthAction => ({
   type: "[AUTH] sign in",
   payload: {
     uid,
