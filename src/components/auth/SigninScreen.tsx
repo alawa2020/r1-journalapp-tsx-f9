@@ -19,8 +19,8 @@ interface FormError {
 
 // start datas
 const initialForm: FormData = {
-  email: 'peter@gmail.com',
-  password: '123456',
+  email: '',
+  password: '',
 }
 const initialError: FormError = {
   state: false,

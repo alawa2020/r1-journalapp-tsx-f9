@@ -23,10 +23,10 @@ interface ErrorData {
 
 // start data
 const initialForm: FormData = {
-  name: 'peter',
-  email: 'peter@gmail.com',
-  password: '123456',
-  password2: '123456',
+  name: '',
+  email: '',
+  password: '',
+  password2: '',
 }
 
 const initialError: ErrorData = {
