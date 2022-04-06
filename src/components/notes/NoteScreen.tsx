@@ -6,7 +6,7 @@ import { Note } from '../../interfaces/interfaces';
 import { useForm } from "../../hooks/useForm";
 import { State } from "../../state/reducers";
 import { NotesAppBar } from "./NotesAppBar";
-import { doNotesUpdateActiveNote } from '../../state/actions/notesActions';
+import { doNotesUpdateActiveNote, startNotesDeleteNote } from '../../state/actions/notesActions';
 
 
 const initialNote: Note = {
@@ -46,6 +46,9 @@ export const NoteScreen = () => {
   }, [activeNote, resetForm])
 
   // funtions
+  const handleDelete = () => {
+    dispatch( startNotesDeleteNote( activeNote?.id || '') );
+  }
 
 
   return (
@@ -81,6 +84,17 @@ export const NoteScreen = () => {
           </div>
         }
       </div>
+
+      {
+        activeNote?.id &&
+        <button
+            className="btn btn-danger"
+            onClick={ handleDelete }
+          >
+            Delete
+        </button>
+      }
+
     </div>
   );
 };

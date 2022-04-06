@@ -32,3 +32,12 @@ export type NotesAction =
       type: '[NOTES] update note';
       payload: Note;
     }
+  | {
+      type: '[NOTES] delete note';
+      payload: {
+        id: string;
+      }
+    }
+  | {
+      type: '[NOTES] clean active note';
+    }

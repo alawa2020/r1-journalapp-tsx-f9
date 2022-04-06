@@ -1,4 +1,4 @@
-import {collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import {collection, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 
 import { Note, UploadedNote } from '../../interfaces/interfaces';
@@ -32,9 +32,20 @@ export const doNotesLoadNotes = ( notes: Note[] ): NotesAction => ({
   payload: notes,
 })
 
-export const doNotesUpdateNote = ( note: Note): NotesAction => ({
+const doNotesUpdateNote = ( note: Note): NotesAction => ({
   type: '[NOTES] update note',
   payload: note,
+});
+
+const doNotesDeleteNote = ( id: string ): NotesAction => ({
+  type: '[NOTES] delete note',
+  payload: {
+    id,
+  }
+});
+
+const doNotesCleanActiveNote = (): NotesAction => ({
+  type: '[NOTES] clean active note',
 })
 
 // asynchronous actions
@@ -79,11 +90,30 @@ export const startNotesUpdateNote = ( note: Note) => {
 
       const docRef = doc( db, `/${ uid }/journal/notes/${ note.id }`)
       await updateDoc( docRef, updatedNote as any );
-      dispatch( doNotesUpdateNote( note ) );
       
+      dispatch( doNotesUpdateNote( note ) );
       Swal.fire('success', 'note updated succesfully', 'success');
     } catch (err) {
+      console.log(err);
       Swal.fire('error', 'the note could not be uploaded', 'error');
+    }
+  }
+}
+
+export const startNotesDeleteNote = ( id: string ) => {
+  return async( dispatch: Dispatch, getState: () => State ) => {
+    try {
+      const { uid } = getState().auth as FullAuthState;
+
+      const docRef = doc( db, `/${ uid }/journal/notes/${ id }`);
+      await deleteDoc( docRef );
+
+      dispatch( doNotesDeleteNote( id ));
+      dispatch( doNotesCleanActiveNote() );
+      Swal.fire('success', 'note deleted succesfully', 'success');
+    } catch (err) {
+      console.log(err);
+      Swal.fire('error', 'the note could not be deleted', 'error');
     }
   }
 }
