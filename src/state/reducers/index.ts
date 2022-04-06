@@ -6,3 +6,6 @@ export const reducers = combineReducers({
   auth: authReducer,
   notes: notesReducer,
 });
+
+export type State = ReturnType<typeof reducers>;
+

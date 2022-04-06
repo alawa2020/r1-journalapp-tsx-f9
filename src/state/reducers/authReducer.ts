@@ -1,11 +1,11 @@
 import { AuthAction } from "../types/types";
 
-interface FullState {
+export interface FullAuthState {
   uid: string;
   name: string;
 }
-interface EmptyState {}
-type AuthState = | FullState | EmptyState
+interface EmptyAuthState {}
+type AuthState = | FullAuthState | EmptyAuthState
 
 const initialState: AuthState = {}
 

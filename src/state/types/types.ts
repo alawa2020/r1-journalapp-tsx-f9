@@ -1,3 +1,5 @@
+import { Note } from "../../../interfaces/interfaces";
+
 export type AuthAction = 
   | { 
       type: '[AUTH] sign in'; 
@@ -11,4 +13,14 @@ export type AuthAction =
     }
 
 export type NotesAction =
-    | { type: '[Notes] something'}
+  | { type: '[NOTES] activate note'; 
+      payload: Note;
+    }
+  | {
+      type: '[NOTES] update active note';
+      payload: Note;
+    }
+  | {
+      type: '[NOTES] add new note';
+      payload: Note;
+    }
