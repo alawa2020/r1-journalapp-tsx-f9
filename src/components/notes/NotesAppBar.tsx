@@ -4,7 +4,7 @@ import { ChangeEvent, useRef} from 'react';
 import { DateTime } from 'luxon';
 
 import { uploadImgAndGetUrl } from '../../helpers/uploadImgAndGetUrl';
-import { doNotesUpdateActiveNote, startNotesAddNewNote } from '../../state/actions/notesActions';
+import { doNotesUpdateActiveNote, startNotesAddNewNote, startNotesUpdateNote } from '../../state/actions/notesActions';
 import { State } from '../../state/reducers';
 import { Note } from '../../interfaces/interfaces';
 
@@ -37,7 +37,7 @@ export const NotesAppBar = () => {
     if ( !activeNote?.id ) {
       dispatch( startNotesAddNewNote( activeNote as Note) );
     } else {
-      alert('note updated!')
+      dispatch( startNotesUpdateNote( activeNote ));
     }
   }
 

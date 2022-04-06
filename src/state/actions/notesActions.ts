@@ -1,4 +1,4 @@
-import {collection, addDoc } from 'firebase/firestore';
+import {collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 
 import { Note, UploadedNote } from '../../interfaces/interfaces';
@@ -32,6 +32,11 @@ export const doNotesLoadNotes = ( notes: Note[] ): NotesAction => ({
   payload: notes,
 })
 
+export const doNotesUpdateNote = ( note: Note): NotesAction => ({
+  type: '[NOTES] update note',
+  payload: note,
+})
+
 // asynchronous actions
 export const startNotesAddNewNote = ( note: Note ) => {
   return async( dispatch: Dispatch, getState: () => State) => {
@@ -62,5 +67,23 @@ export const startNotesLoadNotes = () => {
     const notes = await getNotes( uid );
     dispatch( doNotesLoadNotes( notes as Note[] ));
 
+  }
+}
+
+export const startNotesUpdateNote = ( note: Note) => {
+  return async( dispatch: Dispatch, getState: () => State ) => {
+    try {
+      const { uid } = getState().auth as FullAuthState;
+      const { id, ...rest } = note;
+      const updatedNote: UploadedNote = { ...rest };
+
+      const docRef = doc( db, `/${ uid }/journal/notes/${ note.id }`)
+      await updateDoc( docRef, updatedNote as any );
+      dispatch( doNotesUpdateNote( note ) );
+      
+      Swal.fire('success', 'note updated succesfully', 'success');
+    } catch (err) {
+      Swal.fire('error', 'the note could not be uploaded', 'error');
+    }
   }
 }

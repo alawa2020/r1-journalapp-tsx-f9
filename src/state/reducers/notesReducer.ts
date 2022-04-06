@@ -36,7 +36,14 @@ export const notesReducer = ( state: NotesState = initialState, action: NotesAct
         ...state,
         notes: [...action.payload],
       }
-      
+    
+    case '[NOTES] update note':
+      return {
+        ...state,
+        notes: state.notes.map( note => (
+          note.id === action.payload.id ? action.payload : note
+        ))
+      }
     default:
       return state;
   }

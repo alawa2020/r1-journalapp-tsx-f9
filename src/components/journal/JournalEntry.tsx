@@ -3,6 +3,9 @@ import { FC } from "react";
 import { DateTime } from 'luxon';
 
 import { Note } from "../../interfaces/interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "../../state/reducers";
+import { doNotesActivateNote } from '../../state/actions/notesActions';
 
 
 interface Props {
@@ -12,8 +15,20 @@ interface Props {
 export const JournalEntry: FC<Props> = ({ note }) => {
   const { id, title, description, date, imgUrl } = note;
   const dt = DateTime.fromMillis( date );
+
+  // hooks
+  const { } = useSelector( (state: State) => state.notes );
+  const dispatch = useDispatch();
+
+  // funtions 
+  const handleClickEntry = () => {
+    dispatch( doNotesActivateNote( note ));
+  }
   return (
-    <div className="journal__entry pointer">
+    <div 
+      className="journal__entry pointer"
+      onClick={handleClickEntry}
+    >
       <div
         className="journal__entry-picture"
         style={{
