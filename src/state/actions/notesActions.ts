@@ -7,6 +7,7 @@ import { db } from '../../firebase/config';
 import { State } from '../reducers';
 import { FullAuthState } from '../reducers/authReducer';
 import Swal from 'sweetalert2';
+import { getNotes } from '../../helpers/getNotes';
 
 
 
@@ -26,6 +27,10 @@ const doNotesAddNewNote = ( note: Note): NotesAction => ({
   payload: note,
 })
 
+export const doNotesLoadNotes = ( notes: Note[] ): NotesAction => ({
+  type: '[NOTES] load notes',
+  payload: notes,
+})
 
 // asynchronous actions
 export const startNotesAddNewNote = ( note: Note ) => {
@@ -48,5 +53,14 @@ export const startNotesAddNewNote = ( note: Note ) => {
       console.log({ err });
       Swal.fire('error', 'the note could not be uploaded', 'error');
     }
+  }
+}
+
+export const startNotesLoadNotes = () => {
+  return async( dispatch: Dispatch, getState: () => State ) => {
+    const { uid } = getState().auth as FullAuthState;
+    const notes = await getNotes( uid );
+    dispatch( doNotesLoadNotes( notes as Note[] ));
+
   }
 }

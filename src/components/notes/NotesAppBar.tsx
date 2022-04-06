@@ -1,11 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useRef} from 'react';
 
+import { DateTime } from 'luxon';
+
 import { uploadImgAndGetUrl } from '../../helpers/uploadImgAndGetUrl';
 import { doNotesUpdateActiveNote, startNotesAddNewNote } from '../../state/actions/notesActions';
 import { State } from '../../state/reducers';
 import { Note } from '../../interfaces/interfaces';
 
+
+const dt = DateTime.now();
 
 export const NotesAppBar = () => {
   // hooks
@@ -39,7 +43,7 @@ export const NotesAppBar = () => {
 
   return (
     <div className="notes__appbar">
-      <span>28 de agosto 2020</span>
+      <span>{ dt.setLocale('es').toFormat("d 'de' LLLL y")}</span>
 
       <div>
         <input 

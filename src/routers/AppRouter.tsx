@@ -10,6 +10,7 @@ import { PublicRoute } from "./PublicRoute";
 import { auth } from '../firebase/config'
 import { useDispatch } from "react-redux";
 import { doAuthSignIn } from "../state/actions/authActions";
+import { startNotesLoadNotes } from "../state/actions/notesActions";
 
 export const AppRouter = () => {
   //hooks
@@ -22,6 +23,7 @@ export const AppRouter = () => {
       if( user?.uid ) {
         setIsAuth( true );
         dispatch( doAuthSignIn( user.uid, user.displayName || '' ) );
+        dispatch( startNotesLoadNotes() );
       } else {
         setIsAuth( false );
       }

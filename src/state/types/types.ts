@@ -24,3 +24,7 @@ export type NotesAction =
       type: '[NOTES] add new note';
       payload: Note;
     }
+  | {
+      type: '[NOTES] load notes';
+      payload: Note[];
+    }
