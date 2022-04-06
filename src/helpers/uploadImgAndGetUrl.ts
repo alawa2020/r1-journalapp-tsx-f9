@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
 
 const api = process.env.REACT_APP_CLOUDINARY_API || '';
+const upload_preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || '';
 
 export const uploadImgAndGetUrl = async( imgFile: File ) => {
   const formData = new FormData();
   formData.append('file', imgFile);
-  formData.append('upload_preset', 'react-journal-curso');
+  formData.append('upload_preset', upload_preset);
   formData.append('folder', 'r1-journalapp-ts-f9');
 
   const options = {
