@@ -48,6 +48,10 @@ const doNotesCleanActiveNote = (): NotesAction => ({
   type: '[NOTES] clean active note',
 })
 
+export const doNotesCleanNotesState = (): NotesAction => ({
+  type: '[NOTES] clean notes state',
+})
+
 // asynchronous actions
 export const startNotesAddNewNote = ( note: Note ) => {
   return async( dispatch: Dispatch, getState: () => State) => {

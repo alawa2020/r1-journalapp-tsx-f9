@@ -12,6 +12,7 @@ import {
 
 import { AuthAction } from "../types/types";
 import { auth } from '../../firebase/config';
+import { doNotesCleanNotesState } from "./notesActions";
 
 
 //synchronous actions
@@ -77,6 +78,7 @@ export const startAuthSignOut = () => {
     try {
       await signOut( auth );
       dispatch( doAuthSignOut() );
+      dispatch( doNotesCleanNotesState() );
     } catch (err) {
       const authError = err as AuthError;
       Swal.fire('Error', authError.message, 'error');

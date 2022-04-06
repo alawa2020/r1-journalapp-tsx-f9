@@ -41,3 +41,6 @@ export type NotesAction =
   | {
       type: '[NOTES] clean active note';
     }
+  | {
+      type: '[NOTES] clean notes state'
+    }
