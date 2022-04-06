@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { Note } from '../../../interfaces/interfaces';
+import { Note } from '../../interfaces/interfaces';
 import { useForm } from "../../hooks/useForm";
 import { State } from "../../state/reducers";
 import { NotesAppBar } from "./NotesAppBar";

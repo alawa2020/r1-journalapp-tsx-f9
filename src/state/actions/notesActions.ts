@@ -1,7 +1,7 @@
 import {collection, addDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 
-import { Note, UploadedNote } from '../../../interfaces/interfaces';
+import { Note, UploadedNote } from '../../interfaces/interfaces';
 import { NotesAction } from '../types/types';
 import { db } from '../../firebase/config';
 import { State } from '../reducers';

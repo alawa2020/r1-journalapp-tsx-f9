@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Note } from "../../../interfaces/interfaces";
+import { Note } from "../../interfaces/interfaces";
 import { startAuthSignOut } from "../../state/actions/authActions";
 import { doNotesActivateNote } from "../../state/actions/notesActions";
 import { JournalEntries } from "./JournalEntries";

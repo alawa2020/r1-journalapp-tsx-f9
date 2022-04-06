@@ -1,8 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 
-import { Note } from '../../interfaces/interfaces';
-
-
 type EventForm = 
 | ChangeEvent<HTMLInputElement> 
 | ChangeEvent<HTMLTextAreaElement>

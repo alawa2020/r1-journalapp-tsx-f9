@@ -1,4 +1,4 @@
-import { Note } from "../../../interfaces/interfaces";
+import { Note } from "../../interfaces/interfaces";
 
 export type AuthAction = 
   | { 

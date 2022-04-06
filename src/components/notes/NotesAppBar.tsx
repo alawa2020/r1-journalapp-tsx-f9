@@ -4,7 +4,7 @@ import { ChangeEvent, useRef} from 'react';
 import { uploadImgAndGetUrl } from '../../helpers/uploadImgAndGetUrl';
 import { doNotesUpdateActiveNote, startNotesAddNewNote } from '../../state/actions/notesActions';
 import { State } from '../../state/reducers';
-import { Note } from '../../../interfaces/interfaces';
+import { Note } from '../../interfaces/interfaces';
 
 
 export const NotesAppBar = () => {
