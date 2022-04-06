@@ -5,4 +5,5 @@
 - State => Redux
 - Styles => SASS
 - Route => react router dom v5
-- Time => luxon
+- Date => luxon
+- Images => cloudinary
